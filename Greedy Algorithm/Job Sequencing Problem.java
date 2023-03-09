@@ -16,8 +16,15 @@ class Solution
        //sort the arr acc. to maximum profit
        Arrays.sort(arr, (a, b)->{return b.profit-a.profit;});
        
+       int max=0;
+       for(int i=0; i<n; i++){
+           if(max < arr[i].deadline){
+               max=arr[i].deadline;
+           }
+       }
+       
        //create a boolean array to mark days
-       boolean []visited=new boolean[n+1];
+       boolean []visited=new boolean[max+1];
        
        int maxProfit=0;
        int cnt=0;
@@ -26,7 +33,7 @@ class Solution
            int bestdays=arr[i].deadline;
            
            //find the day for work within deadline
-           while(i>0 && visited[bestdays]==true){
+           while(visited[bestdays]==true){
                bestdays--;
            }
            
